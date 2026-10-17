@@ -16,7 +16,7 @@ Custom Dalamud plugin repository for gnomerock's FFXIV plugins.
 
 | Plugin | What it does | Source |
 |---|---|---|
-| **Konnyaku Jelly** | Translates FFXIV chat between English and Japanese with ChatGPT, Claude or Gemini. [Tutorial](https://gnomerock.github.io/konyakku/) | [gnomerock/konyakku](https://github.com/gnomerock/konyakku) |
+| **Konnyaku Jelly** | Translates FFXIV chat between English and Japanese with ChatGPT, Claude or Gemini. [Tutorial](https://gnomerock.github.io/konnyaku-jelly/) | [gnomerock/konnyaku-jelly](https://github.com/gnomerock/konnyaku-jelly) |
 
 ## How it works
 
@@ -24,5 +24,5 @@ Custom Dalamud plugin repository for gnomerock's FFXIV plugins.
 
 To add a plugin:
 1. Add an entry to `repo.json` with a unique `InternalName`.
-2. Copy the release workflow from `gnomerock/konyakku` into the plugin's repo and change `PLUGIN` to its `InternalName`.
+2. Copy the release workflow from `gnomerock/konnyaku-jelly` into the plugin's repo and change `PLUGIN` to its `InternalName`.
 3. Add the `GNOMOD_TOKEN` secret to the plugin's repo.
