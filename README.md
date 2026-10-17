@@ -20,7 +20,7 @@ Custom Dalamud plugin repository for gnomerock's FFXIV plugins.
 
 | Plugin | What it does | Source |
 |---|---|---|
-| **Konnyaku Jelly** | Translates FFXIV chat between English and Japanese with ChatGPT, Claude or Gemini. [Tutorial](https://gnomerock.github.io/konnyaku-jelly/) | [gnomerock/konnyaku-jelly](https://github.com/gnomerock/konnyaku-jelly) |
+| **Konnyaku Jelly** | Translates FFXIV chat between English and Japanese with ChatGPT, Claude or Gemini, and lists Party Finder with filters you save. [Tutorial](https://gnomerock.github.io/konnyaku-jelly/) | [gnomerock/konnyaku-jelly](https://github.com/gnomerock/konnyaku-jelly) |
 
 ## How it works
 
