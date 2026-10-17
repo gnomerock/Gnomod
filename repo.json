@@ -35,6 +35,7 @@
     "Punchline": "list and filter Party Finder with your own filters.",
     "Description": "Shows the Party Finder listings the game has loaded in its own window and filters them with filters you save: duty or category, open slots for your job, item level, objective, duty-complete condition and more.",
     "ApplicableVersion": "any",
+    "IconUrl": "https://raw.githubusercontent.com/gnomerock/tazunebito-stick/main/Tazunebito/images/icon.png",
     "RepoUrl": "https://github.com/gnomerock/tazunebito-stick",
     "Tags": [
       "party finder",
