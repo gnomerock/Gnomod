@@ -21,6 +21,7 @@ Custom Dalamud plugin repository for gnomerock's FFXIV plugins.
 | Plugin | What it does | Source |
 |---|---|---|
 | **Konnyaku Jelly** | Translates FFXIV chat between English and Japanese with ChatGPT, Claude or Gemini. [Tutorial](https://gnomerock.github.io/konnyaku-jelly/) | [gnomerock/konnyaku-jelly](https://github.com/gnomerock/konnyaku-jelly) |
+| **Tazunebito Stick** | Lists Party Finder listings in its own window and filters them with filters you save (duty, open slots for your job, item level, objective and more). | [gnomerock/tazunebito-stick](https://github.com/gnomerock/tazunebito-stick) |
 
 ## How it works
 
