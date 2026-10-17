@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gnomod Plugins</title>
+<meta name="description" content="Gnomod: gnomerock's Dalamud plugin repository for FFXIV. Browse plugins and add one repository URL to get them all.">
+<meta property="og:title" content="Gnomod Plugins">
+<meta property="og:description" content="gnomerock's Dalamud plugins for FFXIV. One repository URL, every plugin.">
+<link rel="icon" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta property="og:image" content="https://gnomerock.github.io/Gnomod/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --cap: #d6453d;
+  --cap-dark: #a92f28;
+  --moss: #2f6b4f;
+  --moss-deep: #1d4634;
+  --gold: #e9b949;
+
+  --bg: #f6f2ea;
+  --surface: #fffdf8;
+  --surface-2: #efe8da;
+  --text: #1f2a24;
+  --muted: #5d6b63;
+  --border: #e2d9c8;
+  --accent: #2f6b4f;
+  --chip: #e7efe9;
+  --chip-text: #2a5a43;
+  --shadow: 0 1px 2px rgba(31, 42, 36, .06), 0 8px 24px rgba(31, 42, 36, .08);
+  --shadow-hover: 0 2px 4px rgba(31, 42, 36, .08), 0 16px 36px rgba(31, 42, 36, .14);
+  --overlay: rgba(20, 28, 24, .55);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111814;
+    --surface: #18221d;
+    --surface-2: #1f2b25;
+    --text: #ecf1ed;
+    --muted: #9fb0a6;
+    --border: #2b3a32;
+    --accent: #7fcca5;
+    --chip: #213229;
+    --chip-text: #a9dcc1;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .3);
+    --shadow-hover: 0 2px 4px rgba(0, 0, 0, .35), 0 16px 36px rgba(0, 0, 0, .45);
+    --overlay: rgba(0, 0, 0, .65);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111814;
+  --surface: #18221d;
+  --surface-2: #1f2b25;
+  --text: #ecf1ed;
+  --muted: #9fb0a6;
+  --border: #2b3a32;
+  --accent: #7fcca5;
+  --chip: #213229;
+  --chip-text: #a9dcc1;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px rgba(0, 0, 0, .3);
+  --shadow-hover: 0 2px 4px rgba(0, 0, 0, .35), 0 16px 36px rgba(0, 0, 0, .45);
+  --overlay: rgba(0, 0, 0, .65);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); }
+button { font: inherit; }
+code, .mono { font-family: "JetBrains Mono", ui-monospace, Consolas, monospace; font-size: .9em; }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+/* Top bar */
+.top { border-bottom: 1px solid var(--border); background: var(--surface); }
+.top .wrap { height: 60px; display: flex; align-items: center; gap: 14px; }
+.logo { display: flex; align-items: center; gap: 10px; font: 800 22px Fraunces, Georgia, serif; color: var(--text); text-decoration: none; letter-spacing: -.01em; }
+.logo img { width: 34px; height: 34px; }
+.top-links { margin-left: auto; display: flex; align-items: center; gap: 6px; }
+.top-links a { color: var(--muted); text-decoration: none; font-weight: 600; font-size: 14px; padding: 6px 10px; border-radius: 8px; }
+.top-links a:hover { background: var(--surface-2); color: var(--text); }
+.icon-btn { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; display: grid; place-items: center; }
+.icon-btn:hover { background: var(--surface-2); }
+
+/* Hero */
+.hero {
+  background:
+    radial-gradient(circle at 85% 20%, rgba(233, 185, 73, .25), transparent 40%),
+    linear-gradient(135deg, var(--moss-deep), var(--moss));
+  color: #f4efe4;
+}
+.hero .wrap { padding-top: 48px; padding-bottom: 52px; display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; align-items: center; }
+.hero h1 { font: 800 clamp(34px, 5vw, 50px)/1.08 Fraunces, Georgia, serif; margin: 0 0 12px; letter-spacing: -.02em; }
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero-icon { width: 96px; height: 96px; border-radius: 22px; box-shadow: 0 12px 30px rgba(0, 0, 0, .35); margin-bottom: 18px; display: block; }
+.hero p { margin: 0; color: #d7e4da; font-size: 18px; max-width: 46ch; }
+.repo-card { background: rgba(255, 255, 255, .08); border: 1px solid rgba(255, 255, 255, .18); border-radius: 18px; padding: 20px; backdrop-filter: blur(6px); }
+.repo-card h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .08em; margin: 0 0 10px; color: var(--gold); }
+.url-row { display: flex; gap: 8px; }
+.url-row input {
+  flex: 1; min-width: 0; border: 1px solid rgba(255, 255, 255, .25); background: rgba(0, 0, 0, .25); color: #fff;
+  border-radius: 10px; padding: 10px 12px; font: 500 13px "JetBrains Mono", monospace;
+}
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: 0; border-radius: 10px; padding: 10px 16px; font-weight: 700; cursor: pointer; text-decoration: none; white-space: nowrap;
+}
+.btn-cap { background: var(--cap); color: #fff; }
+.btn-cap:hover { background: var(--cap-dark); }
+.btn-ghost { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--accent); }
+.repo-card ol { margin: 14px 0 0; padding-left: 20px; color: #d7e4da; font-size: 14px; }
+.repo-card ol code { background: rgba(0, 0, 0, .25); padding: 1px 6px; border-radius: 6px; color: #fff; }
+
+/* Toolbar */
+.toolbar { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin: 28px 0 14px; }
+.search { position: relative; flex: 1 1 280px; }
+.search svg { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--muted); }
+.search input {
+  width: 100%; border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  border-radius: 12px; padding: 11px 14px 11px 40px; font-size: 15px;
+}
+.search input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+select { border: 1px solid var(--border); background: var(--surface); color: var(--text); border-radius: 12px; padding: 10px 12px; font-size: 14px; font-weight: 600; }
+.count { color: var(--muted); font-size: 14px; margin-left: auto; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.chip {
+  border: 1px solid var(--border); background: var(--surface); color: var(--muted);
+  border-radius: 999px; padding: 4px 12px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.chip:hover { color: var(--text); border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+
+/* Grid */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 18px;
+  box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 12px;
+  transition: transform .15s ease, box-shadow .15s ease; cursor: pointer; text-align: left; color: inherit; width: 100%;
+}
+.card:hover, .card:focus-visible { transform: translateY(-2px); box-shadow: var(--shadow-hover); outline: none; }
+.card:focus-visible { outline: 2px solid var(--accent); }
+.card-head { display: flex; gap: 14px; align-items: flex-start; }
+.plugin-icon { width: 64px; height: 64px; border-radius: 16px; flex: none; object-fit: cover; background: var(--surface-2); }
+.card h3 { margin: 0; font-size: 18px; line-height: 1.25; }
+.by { color: var(--muted); font-size: 13px; }
+.punch { margin: 0; color: var(--text); font-size: 15px; }
+.punch::first-letter { text-transform: uppercase; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { background: var(--chip); color: var(--chip-text); border-radius: 6px; padding: 1px 8px; font-size: 12px; font-weight: 600; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 14px; color: var(--muted); font-size: 13px; margin-top: auto; padding-top: 10px; border-top: 1px dashed var(--border); }
+.meta span { display: inline-flex; align-items: center; gap: 5px; }
+.meta svg { width: 14px; height: 14px; }
+.badge-new { margin-left: 6px; background: var(--gold); color: #3a2a00; font-size: 11px; font-weight: 800; padding: 1px 7px; border-radius: 6px; vertical-align: middle; }
+
+.soon {
+  border: 2px dashed var(--border); border-radius: 18px; display: grid; place-items: center; text-align: center;
+  color: var(--muted); padding: 28px; min-height: 220px;
+}
+.soon img { width: 56px; height: 56px; opacity: .55; margin-bottom: 8px; filter: grayscale(.4); }
+.empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 40px 0; }
+
+/* Details dialog */
+dialog {
+  border: 0; padding: 0; border-radius: 22px; background: var(--surface); color: var(--text);
+  width: min(720px, calc(100vw - 24px)); max-height: calc(100vh - 32px); box-shadow: 0 30px 80px rgba(0, 0, 0, .35);
+}
+dialog::backdrop { background: var(--overlay); backdrop-filter: blur(2px); }
+.d-head { display: flex; gap: 18px; align-items: center; padding: 24px 24px 18px; background: var(--surface-2); border-bottom: 1px solid var(--border); position: relative; }
+.d-head .plugin-icon { width: 88px; height: 88px; border-radius: 22px; }
+.d-head h2 { margin: 0 0 2px; font: 800 28px/1.15 Fraunces, Georgia, serif; }
+.d-close { position: absolute; top: 14px; right: 14px; }
+.d-body { padding: 20px 24px 26px; display: grid; grid-template-columns: 1fr 220px; gap: 24px; }
+.d-body h3 { font-size: 13px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin: 0 0 8px; }
+.d-body p { margin: 0 0 18px; }
+.d-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 24px; padding-top: 18px; }
+.facts { list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.facts li { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(--border); }
+.facts li span:first-child { color: var(--muted); }
+.facts li span:last-child { font-weight: 600; text-align: right; }
+.steps { margin: 0; padding-left: 20px; }
+.steps li { margin-bottom: 6px; }
+.steps code { background: var(--surface-2); padding: 1px 6px; border-radius: 6px; }
+
+.toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0;
+  background: var(--text); color: var(--bg); padding: 10px 18px; border-radius: 12px; font-weight: 600;
+  transition: .2s ease; pointer-events: none; z-index: 50;
+}
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+footer { margin-top: 56px; padding: 24px 0 40px; border-top: 1px solid var(--border); color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; }
+
+@media (max-width: 760px) {
+  .wrap { padding: 0 16px; }
+  .hero .wrap { grid-template-columns: 1fr; padding-top: 34px; padding-bottom: 36px; gap: 24px; }
+  .grid { grid-template-columns: 1fr; }
+  .top-links a { display: none; }
+  .count { margin-left: 0; width: 100%; }
+  .d-body { grid-template-columns: 1fr; }
+  .d-head { padding: 20px 16px 16px; }
+  .d-head .plugin-icon { width: 64px; height: 64px; border-radius: 16px; }
+  .d-head h2 { font-size: 22px; }
+  .d-body { padding: 16px; }
+  .d-actions { margin: 0 16px; }
+  .url-row { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) { .card, .toast { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./"><img src="icon.png" alt="">Gnomod</a>
+    <nav class="top-links">
+      <a href="#plugins">Plugins</a>
+      <a href="https://github.com/gnomerock/Gnomod">GitHub</a>
+      <button class="icon-btn" id="themeBtn" aria-label="Switch light or dark mode">◐</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-text">
+      <img class="hero-icon" src="icon.png" alt="Gnomod mascot: a smiling gnome in a red cap with a golden gear">
+      <h1>Little plugins for <em>Eorzea</em>.</h1>
+      <p>Dalamud plugins for FFXIV by gnomerock. Add one repository and every Gnomod plugin shows up in your plugin installer, with updates included.</p>
+    </div>
+    <div class="repo-card">
+      <h2>Add the Gnomod repository</h2>
+      <div class="url-row">
+        <input id="repoUrl" readonly value="https://raw.githubusercontent.com/gnomerock/Gnomod/main/repo.json" aria-label="Repository URL">
+        <button class="btn btn-cap" data-copy="#repoUrl">Copy</button>
+      </div>
+      <ol>
+        <li>In game, type <code>/xlsettings</code> → <b>Experimental</b>.</li>
+        <li>Paste the URL under <b>Custom Plugin Repositories</b>, tick <b>Enabled</b>, click <b>+</b>, then <b>Save and Close</b>.</li>
+        <li>Type <code>/xlplugins</code> and install from <b>All Plugins</b>.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<main class="wrap" id="plugins">
+  <div class="toolbar">
+    <label class="search">
+      <span class="sr">Search plugins</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Search plugins, tags, features…" autocomplete="off">
+    </label>
+    <label>
+      <span class="sr">Sort</span>
+      <select id="sort">
+        <option value="updated">Recently updated</option>
+        <option value="name">Name A–Z</option>
+        <option value="downloads">Most downloaded</option>
+      </select>
+    </label>
+    <span class="count" id="count"></span>
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Filter by tag"></div>
+  <div class="grid" id="grid" aria-live="polite"></div>
+</main>
+
+<dialog id="details" aria-labelledby="d-name"></dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<footer>
+  <div class="wrap">
+    <span>Gnomod · Dalamud plugins by gnomerock · Not affiliated with Square Enix.</span>
+    <span><a href="repo.json">repo.json</a> · <a href="https://github.com/gnomerock/Gnomod">GitHub</a></span>
+  </div>
+</footer>
+
+<script>
+// Extra links repo.json has no field for, keyed by InternalName.
+const EXTRAS = {
+  Konyakku: { guide: 'https://gnomerock.github.io/konnyaku-jelly/' },
+};
+// Tags hidden from the filter row (too specific to be useful filters).
+const HIDDEN_TAGS = new Set(['translate', 'thai']);
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const safeUrl = u => /^https:\/\//.test(u || '') ? u : '';
+const repoPath = u => (safeUrl(u).match(/^https:\/\/github\.com\/([^/]+\/[^/#?]+)/) || [])[1];
+
+let plugins = [];
+let activeTag = null;
+
+const icons = {
+  clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  down: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14"/></svg>',
+  ver: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12 12 20 4 12V4h8z"/><circle cx="8.5" cy="8.5" r="1.5"/></svg>',
+};
+
+function ago(sec) {
+  if (!sec) return 'unknown';
+  const d = (Date.now() / 1000 - sec) / 86400;
+  if (d < 1) return 'today';
+  if (d < 2) return 'yesterday';
+  if (d < 30) return `${Math.floor(d)} days ago`;
+  if (d < 365) return `${Math.floor(d / 30)} mo ago`;
+  return `${Math.floor(d / 365)} yr ago`;
+}
+const fmtDate = sec => sec ? new Date(sec * 1000).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) : 'unknown';
+const fmtNum = n => n == null ? '—' : n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : String(n);
+
+function iconImg(p, cls = 'plugin-icon') {
+  const src = safeUrl(p.IconUrl);
+  return src
+    ? `<img class="${cls}" src="${esc(src)}" alt="" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'${cls}'}))">`
+    : `<div class="${cls}"></div>`;
+}
+
+function matches(p, q) {
+  if (activeTag && !(p.Tags || []).includes(activeTag)) return false;
+  if (!q) return true;
+  const hay = [p.Name, p.Punchline, p.Description, p.Author, ...(p.Tags || [])].join(' ').toLowerCase();
+  return q.split(/\s+/).every(w => hay.includes(w));
+}
+
+function render() {
+  const q = $('#q').value.trim().toLowerCase();
+  const sort = $('#sort').value;
+  const list = plugins.filter(p => matches(p, q)).sort((a, b) =>
+    sort === 'name' ? a.Name.localeCompare(b.Name)
+    : sort === 'downloads' ? (b._downloads ?? -1) - (a._downloads ?? -1)
+    : (b.LastUpdate || 0) - (a.LastUpdate || 0));
+
+  $('#count').textContent = `${list.length} of ${plugins.length} plugin${plugins.length === 1 ? '' : 's'}`;
+
+  const cards = list.map(p => {
+    const fresh = p.LastUpdate && Date.now() / 1000 - p.LastUpdate < 7 * 86400;
+    return `
+    <button class="card" data-id="${esc(p.InternalName)}" aria-label="${esc(p.Name)} details">
+      <div class="card-head">
+        ${iconImg(p)}
+        <div>
+          <h3>${esc(p.Name)}${fresh ? '<span class="badge-new">UPDATED</span>' : ''}</h3>
+          <div class="by">by ${esc(p.Author)}</div>
+        </div>
+      </div>
+      <p class="punch">${esc(p.Punchline)}</p>
+      <div class="tags">${(p.Tags || []).slice(0, 5).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+      <div class="meta">
+        <span>${icons.ver}v${esc(p.AssemblyVersion)}</span>
+        <span>${icons.clock}${ago(p.LastUpdate)}</span>
+        <span data-dl="${esc(p.InternalName)}">${icons.down}${fmtNum(p._downloads)}</span>
+      </div>
+    </button>`;
+  });
+
+  if (!list.length) cards.push('<div class="empty">No plugins match. Try another search or tag.</div>');
+  else if (!q && !activeTag) cards.push(`
+    <div class="soon"><div><img src="icon.png" alt=""><div><b>More plugins brewing</b></div><div>New Gnomod plugins appear here automatically.</div></div></div>`);
+  $('#grid').innerHTML = cards.join('');
+}
+
+function renderChips() {
+  const counts = {};
+  plugins.forEach(p => (p.Tags || []).forEach(t => { if (!HIDDEN_TAGS.has(t)) counts[t] = (counts[t] || 0) + 1; }));
+  const tags = Object.keys(counts).sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
+  $('#chips').innerHTML = ['All', ...tags].map(t =>
+    `<button class="chip" data-tag="${t === 'All' ? '' : esc(t)}" aria-pressed="${(t === 'All' ? !activeTag : activeTag === t)}">${esc(t)}</button>`).join('');
+}
+
+function openDetails(id, push = true) {
+  const p = plugins.find(x => x.InternalName === id);
+  if (!p) return;
+  const extra = EXTRAS[p.InternalName] || {};
+  const src = safeUrl(p.RepoUrl);
+  const zip = safeUrl(p.DownloadLinkInstall);
+  $('#details').innerHTML = `
+    <div class="d-head">
+      ${iconImg(p)}
+      <div>
+        <h2 id="d-name">${esc(p.Name)}</h2>
+        <div class="by">by ${esc(p.Author)} · v${esc(p.AssemblyVersion)}</div>
+      </div>
+      <button class="icon-btn d-close" aria-label="Close" data-close>✕</button>
+    </div>
+    <div class="d-actions">
+      <button class="btn btn-cap" data-copy-text="https://raw.githubusercontent.com/gnomerock/Gnomod/main/repo.json">Copy repository URL</button>
+      ${extra.guide ? `<a class="btn btn-ghost" href="${esc(extra.guide)}">How to use</a>` : ''}
+      ${src ? `<a class="btn btn-ghost" href="${esc(src)}">Source code</a>` : ''}
+    </div>
+    <div class="d-body">
+      <div>
+        <h3>About</h3>
+        <p>${esc(p.Description || p.Punchline)}</p>
+        <h3>Install</h3>
+        <ol class="steps">
+          <li>Add the Gnomod repository URL in <code>/xlsettings</code> → <b>Experimental</b> → <b>Custom Plugin Repositories</b>.</li>
+          <li>Open <code>/xlplugins</code>, search for <b>${esc(p.Name)}</b> and click <b>Install</b>.</li>
+          <li>Updates arrive through the plugin installer automatically.</li>
+        </ol>
+      </div>
+      <div>
+        <h3>Details</h3>
+        <ul class="facts">
+          <li><span>Version</span><span>${esc(p.AssemblyVersion)}</span></li>
+          <li><span>Updated</span><span>${fmtDate(p.LastUpdate)}</span></li>
+          <li><span>Downloads</span><span>${p._downloads == null ? '—' : p._downloads.toLocaleString()}</span></li>
+          <li><span>Dalamud API</span><span>${esc(p.DalamudApiLevel)}</span></li>
+          <li><span>Internal name</span><span class="mono">${esc(p.InternalName)}</span></li>
+          ${zip ? `<li><span>Package</span><span><a href="${esc(zip)}">latest.zip</a></span></li>` : ''}
+        </ul>
+        <div class="tags" style="margin-top:14px">${(p.Tags || []).map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+      </div>
+    </div>`;
+  if (!$('#details').open) $('#details').showModal();
+  if (push) history.replaceState(null, '', '#' + encodeURIComponent(id));
+}
+
+function closeDetails() {
+  $('#details').close();
+}
+$('#details').addEventListener('close', () => history.replaceState(null, '', location.pathname + location.search));
+$('#details').addEventListener('click', e => {
+  if (e.target === e.currentTarget || e.target.closest('[data-close]')) closeDetails();
+});
+
+let toastTimer;
+function toast(msg) {
+  const t = $('#toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1600);
+}
+async function copy(text) {
+  try { await navigator.clipboard.writeText(text); toast('Repository URL copied'); }
+  catch { toast('Press Ctrl+C to copy'); }
+}
+
+document.addEventListener('click', e => {
+  const card = e.target.closest('.card');
+  if (card) return openDetails(card.dataset.id);
+  const chip = e.target.closest('.chip');
+  if (chip) { activeTag = chip.dataset.tag || null; renderChips(); return render(); }
+  const c1 = e.target.closest('[data-copy]');
+  if (c1) { const el = $(c1.dataset.copy); el.select(); return copy(el.value); }
+  const c2 = e.target.closest('[data-copy-text]');
+  if (c2) return copy(c2.dataset.copyText);
+});
+$('#q').addEventListener('input', render);
+$('#sort').addEventListener('change', render);
+
+// Total release downloads per plugin from the GitHub API. Optional: the page works without it.
+async function loadDownloads() {
+  await Promise.all(plugins.map(async p => {
+    const repo = repoPath(p.RepoUrl);
+    if (!repo) return;
+    try {
+      const r = await fetch(`https://api.github.com/repos/${repo}/releases?per_page=100`);
+      if (!r.ok) return;
+      const releases = await r.json();
+      p._downloads = releases.reduce((sum, rel) => sum + rel.assets.reduce((s, a) => s + a.download_count, 0), 0);
+    } catch {}
+  }));
+  render();
+  if ($('#details').open) openDetails(decodeURIComponent(location.hash.slice(1)), false);
+}
+
+async function load() {
+  try {
+    const r = await fetch('repo.json', { cache: 'no-cache' });
+    plugins = (await r.json()).filter(p => p && p.InternalName && p.Name);
+  } catch {
+    $('#grid').innerHTML = '<div class="empty">Couldn\'t load the plugin list. <a href="repo.json">Open repo.json</a></div>';
+    return;
+  }
+  renderChips();
+  render();
+  if (location.hash.length > 1) openDetails(decodeURIComponent(location.hash.slice(1)), false);
+  loadDownloads();
+}
+
+const root = document.documentElement;
+try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch {}
+$('#themeBtn').addEventListener('click', () => {
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('theme', root.dataset.theme); } catch {}
+});
+
+load();
+</script>
+</body>
+</html>

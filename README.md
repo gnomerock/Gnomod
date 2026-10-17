@@ -1,6 +1,10 @@
 # Gnomod
 
+<img src="icon.png" alt="Gnomod" width="96" align="right">
+
 Custom Dalamud plugin repository for gnomerock's FFXIV plugins.
+
+**🛒 Browse the plugins: https://gnomerock.github.io/Gnomod/**
 
 ## Install
 
@@ -26,3 +30,7 @@ To add a plugin:
 1. Add an entry to `repo.json` with a unique `InternalName`.
 2. Copy the release workflow from `gnomerock/konnyaku-jelly` into the plugin's repo and change `PLUGIN` to its `InternalName`.
 3. Add the `GNOMOD_TOKEN` secret to the plugin's repo.
+
+## Website
+
+`index.html` is the plugin listing at https://gnomerock.github.io/Gnomod/ (GitHub Pages, served from the root of `main`). It reads `repo.json` when the page loads, so new plugins and versions show up there without editing the page. Download counts come from each plugin's GitHub releases. For a "How to use" button, add the plugin's tutorial link to `EXTRAS` in `index.html`. `icon.png` was generated with Codex CLI.
