@@ -3,7 +3,7 @@
     "Author": "gnomerock",
     "Name": "Konnyaku Jelly",
     "InternalName": "Konyakku",
-    "AssemblyVersion": "0.7.3.0",
+    "AssemblyVersion": "0.7.4.0",
     "Punchline": "translate FFXIV chat with ChatGPT, Claude or Gemini, and filter Party Finder.",
     "Description": "Translates incoming chat into your language and lets you write messages in your own language, translated before sending. Works with your ChatGPT subscription (via Codex CLI login) or an OpenAI, Claude or Gemini API key. Also lists Party Finder listings in its own window with filters you save (duty, open slots for your job, item level and more) and translates their descriptions.",
     "ApplicableVersion": "any",
@@ -25,9 +25,9 @@
     "DalamudApiLevel": 15,
     "LoadPriority": 0,
     "AcceptsFeedback": true,
-    "DownloadLinkInstall": "https://github.com/gnomerock/konnyaku-jelly/releases/download/v0.7.3.0/latest.zip",
-    "DownloadLinkUpdate": "https://github.com/gnomerock/konnyaku-jelly/releases/download/v0.7.3.0/latest.zip",
-    "DownloadLinkTesting": "https://github.com/gnomerock/konnyaku-jelly/releases/download/v0.7.3.0/latest.zip",
-    "LastUpdate": 1792302279
+    "DownloadLinkInstall": "https://github.com/gnomerock/konnyaku-jelly/releases/download/v0.7.4.0/latest.zip",
+    "DownloadLinkUpdate": "https://github.com/gnomerock/konnyaku-jelly/releases/download/v0.7.4.0/latest.zip",
+    "DownloadLinkTesting": "https://github.com/gnomerock/konnyaku-jelly/releases/download/v0.7.4.0/latest.zip",
+    "LastUpdate": 1792815051
   }
 ]
