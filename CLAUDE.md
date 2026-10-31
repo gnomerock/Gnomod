@@ -15,7 +15,7 @@ Gnomod is gnomerock's custom Dalamud (FFXIV) plugin repository. It has no plugin
 Each plugin lives in its own repo (e.g. `gnomerock/konnyaku-jelly`) and publishes `latest.zip` on its GitHub Releases. That repo's release workflow writes back to `repo.json` here, updating only the entry whose `InternalName` matches its `PLUGIN` setting, using a `GNOMOD_TOKEN` secret. So version fields (`AssemblyVersion`, `DownloadLink*`, `LastUpdate`) are normally changed by CI, not by hand. Commits like "Update Konyakku to x.y.z" come from that workflow.
 
 To add a plugin:
-1. Add an entry to `repo.json` with a unique `InternalName` (it must match the plugin assembly's internal name; e.g. Konnyaku Jelly's is `Konyakku`).
+1. Add an entry to `repo.json` with a unique `InternalName` (it must match the plugin assembly's internal name; e.g. Konyaku Jelly's is `Konyakku`).
 2. Copy the release workflow from `gnomerock/konnyaku-jelly` into the plugin's repo and set `PLUGIN` to its `InternalName`.
 3. Add the `GNOMOD_TOKEN` secret to the plugin's repo.
 4. Add a row to the Plugins table in `README.md`.
